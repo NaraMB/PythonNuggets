@@ -39,7 +39,7 @@ access the filesystem first and between the time of access
 and computations on the file, the thread has to wait!
 
 In here, I have simulated the thread wait using "sleep"
-method making it an idea IO bound task.
+method making it an ideal IO bound task.
 
 ### Python GIL
 If we use, multi-threading in a cpu-intensive task, python cannot take advantages of multiple cores of the CPUs spawning multiple threads to get the work done in parallel. Only one thread can work at a time with context switching with other threads. So, more threads, more context switch and higher latency. So, python until 3.13 didn't support multi-threading in it's true sense!
