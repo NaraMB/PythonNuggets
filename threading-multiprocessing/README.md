@@ -42,26 +42,26 @@ In here, I have simulated the thread wait using "sleep"
 method making it an idea IO bound task.
 
 ### Python GIL
-If we use, multi-threading in a cpu-intensive task, python cannot take advantages of multiple cores of the CPUs spawning multiple threads to get the work done in parallel. Only one thread can work at a time with context switching with other threads, causing context-switching.
+If we use, multi-threading in a cpu-intensive task, python cannot take advantages of multiple cores of the CPUs spawning multiple threads to get the work done in parallel. Only one thread can work at a time with context switching with other threads. So, more threads, more context switch and higher latency. So, python until 3.13 didn't support multi-threading in it's true sense!
 
 Of course, threads is about concurrency but programming languages like JAVA run multiple threads on multiple cores of CPU making them parallel-in-nature. If there are multiple threads on a single core, then these threads run concurrently.
 
-So, in a cpu-bound tasks, threads are slower compared to processors, though processors have a bit of overhead in allocating multiple system resources.
+Multi-processing, on the other hand, still spawns a single thread (because thread is the unit of task) but within each core getting it's own compute resources. There will also be a way for inter-process communication. So, this makes multi-processing run parallely!
 
-But, in io-bound tasks, because threads have to wait, other threads take up CPU meanwhile and run concurrently! 
+So, in a cpu-bound tasks, threads are slower compared to processors, though processors have a bit of overhead in allocating multiple system resources.
+But, in io-bound tasks, because threads have to wait, other threads take up CPU and run concurrently meanwhile! 
 
 You'll see this in action running the python modules of multi-threading and multi-processing for cpu-bound and io-bound tasks.
 
 Here are my results on a single run:
 ![alt text](image.png)
 
-The execution time will vary for every run depending on number of applications opened in your system, CPU cores etc. The point is: cpu-intensive tasks are faster with multi-processing relative to multi-threading in python because of GIL.
+The execution time will vary depending on number of applications opened in your system, CPU cores etc. The point is: cpu-intensive tasks are faster with multi-processing relative to multi-threading in python because of GIL.
 
 ## Concurrency (Threads) vs Parallelism (Processors)
-For a simple and fun way to understand
-difference between concurrency and Parallelism, check this fastAPI link:
+For a simple and fun way to understand the difference between concurrency and Parallelism, check this fastAPI link:
 
-[Concurrency and Parallelism the Burger way](https://fastapi.tiangolo.com/async/#asynchronous-code)
+[FastAPI: Concurrency and Parallelism the Burger way](https://fastapi.tiangolo.com/async/#asynchronous-code)
 
 
 
